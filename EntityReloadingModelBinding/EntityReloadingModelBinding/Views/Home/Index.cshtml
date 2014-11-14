@@ -1,0 +1,36 @@
+﻿@model EntityReloadingModelBinding.Models.VMEntity
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<html>
+<head>
+    <title>bla</title>
+</head>
+<body>
+    @using(Html.BeginForm())
+    {
+        <h2>Index</h2>
+        <ul>
+            <li>
+                @Html.LabelFor(_ => _.Id)
+                @Html.DisplayFor(_ => _.Id)
+            </li>
+            <li>
+                @Html.LabelFor(_ => _.Firstname)
+                @Html.EditorFor(_ => _.Firstname)
+            </li>
+            <li>
+                @Html.LabelFor(_ => _.Lastname)
+                @Html.EditorFor(_ => _.Lastname)
+            </li>
+            <li>
+                @Html.LabelFor(_ => _.SomeComplexType)
+                @Html.DisplayFor(_ => _.SomeComplexType)
+            </li>
+        </ul>
+        <input type="submit" title="submit" />
+    }
+</body>
+</html>
