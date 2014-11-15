@@ -10,7 +10,7 @@
             :base(entity)
         { }
 
-        public int Id { get { return this.Entity.Id;  } }
+        public int Id { get { return this.Entity.Id; } set { this.Entity.Id = value; } }
 
         public string Firstname { get { return this.Entity.Firstname; } set { this.Entity.Firstname = value; } }
 

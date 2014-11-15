@@ -1,13 +1,18 @@
 ﻿@model EntityReloadingModelBinding.Models.VMEntity
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Get";
 }
 
 @using (Html.BeginForm("Get", "Home"))
 {
+    @Html.HiddenFor(_ => _.Id)
     <h2>Index</h2>
-    <ul class ="list-unstyled">
+    <ul class="list-unstyled">
+        <li>
+            @Html.LabelFor(_ => _.Id)
+            @Html.DisplayFor(_ => _.Id)
+        </li>
         <li>
             @Html.LabelFor(_ => _.Firstname)
             @Html.EditorFor(_ => _.Firstname)
@@ -15,6 +20,10 @@
         <li>
             @Html.LabelFor(_ => _.Lastname)
             @Html.EditorFor(_ => _.Lastname)
+        </li>
+        <li>
+            @Html.LabelFor(_ => _.SomeComplexType)
+            @Html.DisplayFor(_ => _.SomeComplexType)
         </li>
     </ul>
     <input type="submit" title="submit" />
