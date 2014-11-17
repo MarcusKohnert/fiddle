@@ -1,6 +1,5 @@
-﻿using EntityReloadingModelBinding.Models;
+﻿using EntityReloadingModelBinding.Controllers;
 using System;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace EntityReloadingModelBinding.ModelBinder
@@ -12,11 +11,14 @@ namespace EntityReloadingModelBinding.ModelBinder
         {
             TEntity entity = default(TEntity);
 
-            var maybeId = this.TryGetIdentifier(controllerContext, bindingContext);
+            var maybeId = this.TryGetIdentifier(bindingContext);
             if (maybeId.Item1)
             {
-                var repo = new Repo();
-                entity = repo.Get<TEntity>(maybeId.Item2);
+                var controller = controllerContext.Controller as BaseController;
+                if (controller != null)
+                {
+                    entity = controller.ReadEntity<TEntity>(maybeId.Item2);
+                }                
             }
             else
             {
@@ -31,8 +33,10 @@ namespace EntityReloadingModelBinding.ModelBinder
             return base.BindModel(controllerContext, bindingContext);
         }
 
-        protected virtual Tuple<bool, int> TryGetIdentifier(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        protected virtual Tuple<bool, int> TryGetIdentifier(ModelBindingContext bindingContext)
         {
+            // TODO: Add custom attribute "Identifier" to ModelClass
+
             var value_Id = bindingContext.ValueProvider.GetValue("Id");
             var value_id = bindingContext.ValueProvider.GetValue("id");
 

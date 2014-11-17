@@ -4,8 +4,12 @@ using System.Web.Mvc;
 
 namespace EntityReloadingModelBinding.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
+        public HomeController()
+            : base(new Repo())
+        { }
+
         public ActionResult Index()
         {
             return View();
@@ -13,8 +17,9 @@ namespace EntityReloadingModelBinding.Controllers
 
         public ActionResult Get(int id)
         { 
-            var repo = new Repo();
-            var entity = repo.Get<Entity>(id);
+            var entity = this.repo
+                             .Get<Entity>(id);
+
             var vm = new VMEntity(entity);
             return View(vm);
         }
@@ -22,8 +27,7 @@ namespace EntityReloadingModelBinding.Controllers
         [HttpPost]
         public ActionResult Get(VMEntity vm)
         {
-            var repo = new Repo();
-            repo.Save(vm.Entity);
+            this.repo.Save(vm.Entity);
 
             if (this.RouteData.Values["id"] == null)
                 return RedirectToAction("Get", new { id = vm.Entity.Id });
