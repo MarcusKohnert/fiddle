@@ -16,5 +16,3 @@ let Sample1() =
     Async.Start myTask
         
     printfn "Test Test"
-
-System.Console.ReadLine() |> ignore
