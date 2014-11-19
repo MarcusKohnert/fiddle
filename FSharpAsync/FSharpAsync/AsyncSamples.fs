@@ -17,4 +17,4 @@ let Sample1() =
         
     printfn "Test Test"
 
-do System.Console.ReadLine() |> ignore
+System.Console.ReadLine() |> ignore
