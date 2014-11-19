@@ -12,7 +12,7 @@ namespace EntityReloadingModelBinding
         {
             var docStore = new DocumentStore
             {
-                Url = "http://nb252:8080",
+                Url = "http://localhost:8080",
                 DefaultDatabase = "EntityDB"
             };
 
