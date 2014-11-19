@@ -22,6 +22,7 @@ namespace EntityReloadingModelBinding.ModelBinder
             }
             else
             {
+                // TODO: Add custom attribute "Entity" to ModelClass. Fall back to property named Entity
                 var entityType = bindingContext.ModelType
                                                .GetProperty("Entity")
                                                .PropertyType;
