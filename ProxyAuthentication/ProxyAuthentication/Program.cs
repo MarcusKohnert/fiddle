@@ -12,11 +12,12 @@ namespace ProxyAuthentication
             var address = new Uri("http://www.google.de");
             var p = new Program();
 
-            p.WebClientWithoutCredentialsSet(address);
-            p.WebClientWithCredentialsSet(address);
-            p.WebRequest_(address);
-            p.HttpClient(address);
-            p.HttpClientWhitchClientHandler(address);
+            //p.WebClientWithoutCredentialsSet(address);
+            //p.WebClientWithCredentialsSet(address);
+            //p.WebRequest_(address);
+            p.WebRequest_SetDefaultCredentials(address);
+            //p.HttpClient(address);
+            //p.HttpClientWhitchClientHandler(address);
 
             Console.ReadLine();
         }
@@ -62,6 +63,22 @@ namespace ProxyAuthentication
             var webRequest = WebRequest.CreateHttp(address);
             webRequest.Proxy = WebRequest.GetSystemWebProxy();
             webRequest.Proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
+            var response = webRequest.GetResponse();
+            using (var reader = new StreamReader(response.GetResponseStream()))
+            {
+                var s = reader.ReadToEnd().Substring(0, 500);
+                Console.WriteLine(s);
+            }
+        }
+
+        /// <summary>
+        /// Will work without app.config settings and without specific instance of WebRequest
+        /// </summary>
+        /// <param name="address"></param>
+        private void WebRequest_SetDefaultCredentials(Uri address)
+        {
+            WebRequest.DefaultWebProxy.Credentials = CredentialCache.DefaultNetworkCredentials;
+            var webRequest = WebRequest.CreateHttp(address);
             var response = webRequest.GetResponse();
             using (var reader = new StreamReader(response.GetResponseStream()))
             {
