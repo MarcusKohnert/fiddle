@@ -4,7 +4,7 @@ open FSharp.Data
 
 type NugetProfile = HtmlProvider<"https://www.nuget.org/profiles/MarcusKohnert/">
 
-let GetStats() =
+let WriteStats() =
     let downloads = NugetProfile().Html
                                   .Descendants(fun n -> n.HasId("stats"))
                                   |> Seq.collect (fun n -> 
