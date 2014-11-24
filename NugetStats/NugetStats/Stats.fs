@@ -10,4 +10,7 @@ let WriteStats() =
                                   |> Seq.collect (fun n -> 
                                                       n.Descendants(fun descendants -> descendants.HasClass("stat-number")))
                                   |> Seq.last
-    printfn "%s" <| downloads.InnerText()
+    use writer = System.IO.File.AppendText("stats")
+    writer.Write(System.DateTime.Now.ToString())
+    writer.Write("\t")
+    writer.WriteLine(downloads.InnerText())
