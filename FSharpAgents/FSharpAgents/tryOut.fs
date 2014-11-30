@@ -2,7 +2,7 @@
 
 type Message<'a> =
 | TxtMessage of string
-| ReplyMessage of AsyncReplyChannel<'a>
+| ReplyMessage of string option * AsyncReplyChannel<'a>
 
 let agent = MailboxProcessor.Start(fun inbox ->
     let rec messageLoop lastMsg = async {
@@ -15,9 +15,15 @@ let agent = MailboxProcessor.Start(fun inbox ->
             printfn "received: %s" m
             return! messageLoop m
 
-        | ReplyMessage channel -> 
-            channel.Reply lastMsg
-            return! messageLoop lastMsg
+        | ReplyMessage (msg, channel) ->
+            match msg with
+            | Some m -> 
+                printfn "received: %s" m
+                channel.Reply ("agent replied " + m)
+                return! messageLoop m
+            | None -> 
+                channel.Reply lastMsg
+                return! messageLoop lastMsg            
     }
 
     messageLoop ""
@@ -34,4 +40,4 @@ let test() =
     
     agent.Post <| TxtMessage "moinsen"
     
-    printfn "replied %s" <| agent.PostAndReply(ReplyMessage, 5000)
+    printfn "replied %s" <| agent.PostAndReply((fun r -> ReplyMessage(Some "Hello", r)), 5000)
