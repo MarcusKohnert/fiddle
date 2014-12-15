@@ -1,6 +1,5 @@
 ﻿namespace FSharpWebApi
 
-open System.Web.Http.Dependencies
 open System.Web.Http.Dispatcher
 open System.Net.Http
 open System.Web.Http.Controllers
