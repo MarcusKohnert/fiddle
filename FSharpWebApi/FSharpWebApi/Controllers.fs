@@ -26,3 +26,13 @@ type CookieController() =
         let response = this.Request.CreateResponse(HttpStatusCode.OK, "some cookie")
         response.Headers.AddCookies([ new Headers.CookieHeaderValue("name", "Brian Toppy")])
         response
+
+type AccountController() =
+    inherit ApiController()
+
+    member this.Get() =
+        let user = this.User
+
+        match this.RequestContext.Principal.Identity.IsAuthenticated with
+        | true -> this.Ok("Some Content") :> IHttpActionResult
+        | false -> this.Unauthorized(new Headers.AuthenticationHeaderValue("WWW-Authenticate")) :> IHttpActionResult

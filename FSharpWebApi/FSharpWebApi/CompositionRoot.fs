@@ -9,15 +9,15 @@ open System.Reactive.Disposables
 type Resolver() =
     
     let getController (controllerDescriptor:HttpControllerDescriptor) =
-                let controllerName = controllerDescriptor.ControllerName
-                if controllerName = "Request" then new RequestController() :> IHttpController
-                elif controllerName = "Cookie" then new CookieController() :> IHttpController
-                else
-                    failwith "no controller with name"
-
+        match controllerDescriptor.ControllerName with
+        | "Request" -> new RequestController() :> IHttpController
+        | "Account" -> new AccountController() :> IHttpController
+        | "Cookie" -> new CookieController() :> IHttpController
+        | _ -> failwith "no controller with name"
+                
     interface IHttpControllerActivator with
         
-        member x.Create(request: HttpRequestMessage, controllerDescriptor: HttpControllerDescriptor, controllerType: Type): IHttpController =
+        member this.Create(request: HttpRequestMessage, controllerDescriptor: HttpControllerDescriptor, controllerType: Type): IHttpController =
             let controller = getController controllerDescriptor
 
             request.RegisterForDispose(Disposable.Create(fun () -> System.Diagnostics.Debug.WriteLine("disposed")))
