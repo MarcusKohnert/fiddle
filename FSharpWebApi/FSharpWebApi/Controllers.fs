@@ -18,3 +18,11 @@ type RequestController() =
 
     member this.Put() =
         this.Ok()
+
+type CookieController() =
+    inherit ApiController()
+
+    member this.Get() =
+        let response = this.Request.CreateResponse(HttpStatusCode.OK, "some cookie")
+        response.Headers.AddCookies([ new Headers.CookieHeaderValue("name", "Brian Toppy")])
+        response

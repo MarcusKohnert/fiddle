@@ -9,7 +9,9 @@ open System.Reactive.Disposables
 type Resolver() =
     
     let getController (controllerDescriptor:HttpControllerDescriptor) =
-                if controllerDescriptor.ControllerName = "Request" then new RequestController() :> IHttpController
+                let controllerName = controllerDescriptor.ControllerName
+                if controllerName = "Request" then new RequestController() :> IHttpController
+                elif controllerName = "Cookie" then new CookieController() :> IHttpController
                 else
                     failwith "no controller with name"
 
