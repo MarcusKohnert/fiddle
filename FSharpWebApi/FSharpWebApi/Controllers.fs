@@ -11,7 +11,9 @@ type RequestController() =
         this.Request.CreateResponse(HttpStatusCode.Accepted, "someValue")
 
     member this.Get() =
-        [1..10]
+        let header = this.Request.Headers.GetCookies("name") |> Seq.head
+        let value = header.["name"].Value
+        ([1..10], value)
 
     member this.Post() =
         this.Created("Request/1", 1)
