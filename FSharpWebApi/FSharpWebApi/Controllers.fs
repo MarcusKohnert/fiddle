@@ -18,3 +18,13 @@ type RequestController() =
 
     member this.Put() =
         this.Ok()
+
+type AccountController() =
+    inherit ApiController()
+
+    member this.Get() =
+        let user = this.User
+
+        match this.RequestContext.Principal.Identity.IsAuthenticated with
+        | true -> this.Ok("Some Content") :> IHttpActionResult
+        | false -> this.Unauthorized(new Headers.AuthenticationHeaderValue("WWW-Authenticate")) :> IHttpActionResult
