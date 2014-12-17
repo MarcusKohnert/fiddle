@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B21C3C
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharpWebApiOwin", "FSharpWebApiOwin\FSharpWebApiOwin.fsproj", "{DFBE9C26-E97C-4E4E-B1DC-4B7038C077A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{D764F018-7C67-4DD2-BB5E-208C1178DA04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D764F018-7C67-4DD2-BB5E-208C1178DA04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D764F018-7C67-4DD2-BB5E-208C1178DA04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFBE9C26-E97C-4E4E-B1DC-4B7038C077A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFBE9C26-E97C-4E4E-B1DC-4B7038C077A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFBE9C26-E97C-4E4E-B1DC-4B7038C077A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFBE9C26-E97C-4E4E-B1DC-4B7038C077A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
