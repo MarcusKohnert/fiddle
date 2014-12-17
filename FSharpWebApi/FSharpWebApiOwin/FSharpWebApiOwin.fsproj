@@ -84,6 +84,9 @@
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="">
+            <server name="OwinHost" exePath="{solutiondir}\packages\OwinHost.3.0.0\tools\OwinHost.exe" cmdArgs="-u {url}" url="http://localhost:12345/" workingDir="{projectdir}" />
+          </servers>
         </WebProjectProperties>
       </FlavorProperties>
       <FlavorProperties Guid="{349c5851-65df-11da-9384-00065b846f21}" User="">
