@@ -7,12 +7,19 @@ open System.Web.Http
 type RequestController() =
     inherit ApiController()
 
+    let getCookie (request:HttpRequestMessage) value =
+        let headers = request.Headers.GetCookies(value)
+        if headers.Count > 0 then
+            let header = Seq.head headers
+            Some (header.[value].Value)
+        else
+            None
+
     member this.Delete() =
         this.Request.CreateResponse(HttpStatusCode.Accepted, "someValue")
 
     member this.Get() =
-        let header = this.Request.Headers.GetCookies("name") |> Seq.head
-        let value = header.["name"].Value
+        let value = getCookie this.Request "name"
         ([1..10], value)
 
     member this.Post() =
