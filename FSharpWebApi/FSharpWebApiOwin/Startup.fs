@@ -10,11 +10,11 @@ type Startup() =
         let config = new HttpConfiguration()
         config.MapHttpAttributeRoutes()
         config.Routes.MapHttpRoute("default", "{controller}") |> ignore
-        app.UseWebApi(config) |> ignore
 
-        config.Formatters.XmlFormatter.UseXmlSerializer <- true
+        config.Formatters.Remove config.Formatters.XmlFormatter |> ignore
         config.Formatters.JsonFormatter.SerializerSettings.ContractResolver <- Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
-        ()
+        
+        app.UseWebApi config |> ignore
 
 module StartupModule =
     [<assembly:OwinStartup(typeof<Startup>)>]
