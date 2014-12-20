@@ -16,8 +16,15 @@ type Startup() =
         cookieOptions.AuthenticationType <- DefaultAuthenticationTypes.ApplicationCookie
         cookieOptions.LoginPath <- new PathString("/Login/LoginExternal") // must be set
         cookieOptions.ExpireTimeSpan <- TimeSpan.FromMinutes(10.0) // default 14 days
+        
         // cookieOptions.SlidingExpiration <- true // default anyways
         // cookieOptions.CookieSecure <- CookieSecureOption.Always // optional but important in prod
+
+        // overwrite 401 behaviour if necessary
+        // let cookieAuthenticationProvider = new CookieAuthenticationProvider()
+        // cookieAuthenticationProvider.OnApplyRedirect <- fun ctx -> ctx.Response.Redirect(ctx.RedirectUri)
+        // cookieOptions.Provider <- cookieAuthenticationProvider
+        
         app.UseCookieAuthentication(cookieOptions) |> ignore
 
 //        app.UseExternalSignInCookie(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ExternalCookie);
