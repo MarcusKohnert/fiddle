@@ -25,14 +25,16 @@ type LoginController() =
     member __.Login() =
         match __.User.Identity.IsAuthenticated with
         | false -> __.Unauthorized([]) :> IHttpActionResult
-        | _ -> __.Ok(__.User) :> IHttpActionResult
+        | _ -> __.Ok(__.User.Identity.Name) :> IHttpActionResult
 
     [<Route("Login/LoginExternal")>]
     [<HttpGet>]
-    member __.LoginExternal() =
+    member __.LoginExternal(returnUrl:string) =
         __.signIntoMiddleware()
-        __.Ok(__.User) :> IHttpActionResult
+        __.Ok()
 
+    [<Route("Login/Logout")>]
+    [<HttpGet>]
     member __.Logout() =
         HttpContext.Current.GetOwinContext().Authentication.SignOut([||])
         __.Ok()
