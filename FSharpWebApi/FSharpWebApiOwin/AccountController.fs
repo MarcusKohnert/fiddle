@@ -52,7 +52,7 @@ type AccountController() =
         let claims = authResult.Identity.Claims.ToList()
         claims.Add(new Claim(ClaimTypes.AuthenticationMethod, provider))
 
-        let claimsIdentity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie)
+        let claimsIdentity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ExternalCookie)
         auth.SignIn(claimsIdentity)
 
-        __.Redirect("~/")
+        __.Redirect("http://webapi.localtest.me:48213/Header")
