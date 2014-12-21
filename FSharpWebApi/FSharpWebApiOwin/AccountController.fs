@@ -1,5 +1,6 @@
 ﻿namespace FSharpWebApiOwin
 
+open System.Linq
 open System.Web.Http.Results
 open System.Web.Http
 open System.Web
@@ -11,6 +12,9 @@ open Microsoft.AspNet.Identity
 open Microsoft.Owin.Security.MicrosoftAccount
 open System.Security.Claims
 open System
+open Microsoft.Owin.Security
+open System.Security.Policy
+open Microsoft.AspNet.Identity
 
 type returnUrl = { ReturnUrl  : string; }
 type redirectUri = { RedirectUri  : string; }
@@ -20,44 +24,35 @@ type ChallengeResult(provider, controller:ApiController) =
 
         member __.ExecuteAsync(token:CancellationToken) =
             let auth = HttpContext.Current.GetOwinContext().Authentication
-            auth.Challenge(provider)
+
+            let authProperties = new AuthenticationProperties()
+            authProperties.RedirectUri <- "http://webApi.localtest.me:48213/Account/Callback?provider=Microsoft"
+
+            auth.Challenge(authProperties, provider)
 
             let response = new HttpResponseMessage(HttpStatusCode.Unauthorized)
             response.RequestMessage <- controller.Request
             Task.FromResult(response)
 
-type MicrosoftAuth() =
-    inherit MicrosoftAccountAuthenticationProvider()
-
-    override this.Authenticated(context:MicrosoftAccountAuthenticatedContext) =
-            context.Identity.AddClaim(new Claim("ExternalAccessToken", context.AccessToken));
-            new Task(fun () -> ())
-
 type AccountController() =
     inherit ApiController()
 
-    let externalLoginData(identity:ClaimsIdentity) =
-        let providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
-        (
-            providerKeyClaim.Issuer,
-            providerKeyClaim.Value,
-            identity.FindFirstValue(ClaimTypes.Name),
-            identity.FindFirstValue("ExternalAccessToken")
-        )
+    [<Route("Account/ExternalLogin")>]
+    [<HttpGet>]
+    member __.Login() =
+        new ChallengeResult([|"Microsoft"|], __)
 
-    [<OverrideAuthentication>]
-    [<HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)>]
-    [<AllowAnonymous>]
-    [<Route("ExternalLogin", Name = "ExternalLogin")>]
-    member this.GetExternalLogin(provider, error) =
-        let redirectUri = ""
+    [<Route("Account/Callback")>]
+    [<HttpGet>]
+    member __.CallbackMicrosoft(provider:string) =
+        let auth = HttpContext.Current.GetOwinContext().Authentication
+        let authResult = auth.AuthenticateAsync(DefaultAuthenticationTypes.ExternalCookie).Result
+        auth.SignOut(DefaultAuthenticationTypes.ExternalCookie)
 
-        let authenticated = this.User.Identity.IsAuthenticated
-        if authenticated = false then new ChallengeResult(provider, this) :> IHttpActionResult
-        else
-            let identity = this.User.Identity :?> ClaimsIdentity
-            let (provider, providerKey, userName, externalAccessToken) = externalLoginData identity
+        let claims = authResult.Identity.Claims.ToList()
+        claims.Add(new Claim(ClaimTypes.AuthenticationMethod, provider))
 
-            HttpContext.Current.GetOwinContext().Authentication.SignIn([| identity |])
+        let claimsIdentity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie)
+        auth.SignIn(claimsIdentity)
 
-            this.Ok() :> IHttpActionResult
+        __.Redirect("~/")
