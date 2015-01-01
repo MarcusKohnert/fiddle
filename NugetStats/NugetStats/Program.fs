@@ -5,5 +5,5 @@ let main args =
     Stats.WriteStats()
 
     System.Console.WriteLine("Done")
-    System.Console.ReadLine() |> ignore
+//    System.Console.ReadLine() |> ignore
     0 // return an integer exit code
