@@ -30,18 +30,18 @@ type Startup() =
 //        app.UseCookieAuthentication(cookieOptions) |> ignore
 
         // these two lines of code are needed if you are using any of the external authentication middleware
-        app.Properties.["Microsoft.Owin.Security.Constants.DefaultSignInAsAuthenticationType"] <- DefaultAuthenticationTypes.ExternalCookie;
-        let externalOptions = new CookieAuthenticationOptions()
-        externalOptions.AuthenticationType <- DefaultAuthenticationTypes.ExternalCookie
-        externalOptions.AuthenticationMode <- AuthenticationMode.Active
-        
-        app.UseCookieAuthentication(externalOptions) |> ignore
-
-        let msOptions = new MicrosoftAccount.MicrosoftAccountAuthenticationOptions()
-        msOptions.ClientId <- ""
-        msOptions.ClientSecret <- ""
-
-        app.UseMicrosoftAccountAuthentication(msOptions) |> ignore
+//        app.Properties.["Microsoft.Owin.Security.Constants.DefaultSignInAsAuthenticationType"] <- DefaultAuthenticationTypes.ExternalCookie;
+//        let externalOptions = new CookieAuthenticationOptions()
+//        externalOptions.AuthenticationType <- DefaultAuthenticationTypes.ExternalCookie
+//        externalOptions.AuthenticationMode <- AuthenticationMode.Active
+//        
+//        app.UseCookieAuthentication(externalOptions) |> ignore
+//
+//        let msOptions = new MicrosoftAccount.MicrosoftAccountAuthenticationOptions()
+//        msOptions.ClientId <- ""
+//        msOptions.ClientSecret <- ""
+//
+//        app.UseMicrosoftAccountAuthentication(msOptions) |> ignore
 
         let config = new HttpConfiguration()
         config.MapHttpAttributeRoutes()

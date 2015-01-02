@@ -10,6 +10,9 @@ type RequestController() =
     member __.Get() =
         [0..10]
 
+    member __.Post([<FromBody>]text:string) =
+        __.Ok(text)
+
 type HeaderController() =
     inherit ApiController()
 
