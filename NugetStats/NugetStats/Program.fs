@@ -2,8 +2,12 @@
 let main args = 
     
     do System.Net.WebRequest.DefaultWebProxy.Credentials <- System.Net.CredentialCache.DefaultNetworkCredentials
-    Stats.WriteStats()
+
+    try
+        Stats.WriteStats()
+    with
+        :? System.Net.WebException -> printfn "no internet connection"
 
     System.Console.WriteLine("Done")
-//    System.Console.ReadLine() |> ignore
-    0 // return an integer exit code
+    Async.RunSynchronously((Async.Sleep 2000))
+    0
