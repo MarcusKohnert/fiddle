@@ -45,6 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Identifiable.cs" />
+    <Compile Include="Data\InMemoryRepository.cs" />
+    <Compile Include="Data\InMemorySession.cs" />
+    <Compile Include="Data\IUnitOfWork.cs" />
+    <Compile Include="Data\Order.cs" />
+    <Compile Include="Data\Customer.cs" />
+    <Compile Include="Data\IRepository.cs" />
     <Compile Include="ISampleService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
