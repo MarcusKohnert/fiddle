@@ -1,5 +1,5 @@
 h(Enum)
-h(Enum.reverse/1)
+(Enum.reverse/1)
 h IO
 h IO.puts
 
