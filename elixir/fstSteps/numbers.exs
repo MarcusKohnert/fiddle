@@ -7,8 +7,7 @@ defmodule Numbers do
   def gcd(x, 0), do: x
   def gcd(x, y), do: gcd(y, rem(x, y))
 
-  def guess(expected, range) do
-  	min .. max = range
+  def guess(expected, min..max) do
   	isIt(min, max, expected)
   end
 
@@ -18,7 +17,7 @@ defmodule Numbers do
   	isIt(min, newmax, expected)
   end
 
-  defp isIt(min, max, expected) when expected > max do
+  defp isIt(_, max, expected) when expected > max do
   	newmax = div(max, 2) + max
   	echo(newmax)
   	isIt(max, newmax, expected)
