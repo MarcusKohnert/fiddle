@@ -31,6 +31,3 @@ defmodule MyList do
   	[from, span(from + 1, to)]
   end
 end
-
-MyList.ceasar('ryvkve', 178)
-|> IO.puts
