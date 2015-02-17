@@ -22,7 +22,7 @@ defmodule MyList do
   def ceasar([head | tail], shift) when head + shift > 122 do
   	[head + shift - 26 | ceasar(tail, shift)]
   end
-  def ceasar([head | tail], shift) do
+  def ceasar([head | tail], shift) when shift > -1 do
   	[head + shift | ceasar(tail, shift)]
   end
 
@@ -31,3 +31,6 @@ defmodule MyList do
   	[from, span(from + 1, to)]
   end
 end
+
+MyList.ceasar('ryvkve', 178)
+|> IO.puts
