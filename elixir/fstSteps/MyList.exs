@@ -25,7 +25,9 @@ defmodule MyList do
   def ceasar([head | tail], shift) do
   	[head + shift | ceasar(tail, shift)]
   end
-end
 
-MyList.ceasar('ryvkve', 13)
-|> IO.puts
+  def span(from, to) when from > to, do: to
+  def span(from, to) do
+  	[from, span(from + 1, to)]
+  end
+end
