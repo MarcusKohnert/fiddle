@@ -4,9 +4,11 @@ defmodule MyEnum do
 
   defp all?([], _predicate, initial), do: initial
   defp all?([head | tail], predicate, initial) do
-  	initial = predicate.(head) && initial
+  	initial = predicate.(head) and initial
   	all?(tail, predicate, initial)
   end
+
+  #def each()
 end
 
 t = MyEnum.all?([1,2,3,8], &(&1<4))
