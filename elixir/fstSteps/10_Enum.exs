@@ -14,9 +14,21 @@ defmodule MyEnum do
   	each(tail, func)
   end
   
+  def filter([], _predicate), do: []
+  def filter([head | tail], predicate) do
+    r = filter(tail, predicate)
+    if (predicate.(head)) do
+      [head | r]
+    else
+      r
+    end
+  end  
+
 end
 
-t = MyEnum.all?([1,2,3,8], &(&1<4))
-IO.inspect(t)
+#t = MyEnum.all?([1,2,3,8], &(&1<4))
+#IO.inspect(t)
 
-MyEnum.each([1,4,5,6,7], &(IO.puts(&1*&1)))
+#MyEnum.each([1,4,5,6,7], &(IO.puts(&1*&1)))
+
+MyEnum.filter([1,3,4,56,8], &(&1>3)) |> IO.inspect
