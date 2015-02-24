@@ -8,8 +8,15 @@ defmodule MyEnum do
   	all?(tail, predicate, initial)
   end
 
-  #def each()
+  def each([], _func), do: ()
+  def each([head | tail], func) do
+  	func.(head)
+  	each(tail, func)
+  end
+  
 end
 
 t = MyEnum.all?([1,2,3,8], &(&1<4))
 IO.inspect(t)
+
+MyEnum.each([1,4,5,6,7], &(IO.puts(&1*&1)))
