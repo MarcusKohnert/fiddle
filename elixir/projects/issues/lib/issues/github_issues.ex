@@ -1,4 +1,5 @@
 defmodule Issues.Github do
+
   @user_agent [{"User-agent", "Elixir"}]	
   @github_url Application.get_env(:issues, :github_url)
 
@@ -18,7 +19,4 @@ defmodule Issues.Github do
     {:ok, :jsx.decode(body)}
   end
 
-  #def handle_response(%{status_code: 200, %HTTPoison.Response: body}), do: {:ok, body}
-
-  #def handle_response(%{status_code: ___, %HTTPoison.Response: body}), do: {:error, body}
 end
