@@ -6,7 +6,7 @@ open Swensen.Unquote
 module Implementation =
     let foo () = ""
 
-module Tests =
+module ``Calculator tests`` =
 
     [<Fact>]
     let ``Given a wonderful spec Calculate() returns the correct result`` () =
