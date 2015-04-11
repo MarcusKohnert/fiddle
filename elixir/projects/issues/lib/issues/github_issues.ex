@@ -1,4 +1,6 @@
 defmodule Issues.Github do
+  
+  require HTTPoison
 
   @user_agent [{"User-agent", "Elixir"}]	
   @github_url Application.get_env(:issues, :github_url)
