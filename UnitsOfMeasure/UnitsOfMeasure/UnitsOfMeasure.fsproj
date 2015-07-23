@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculation.fs" />
+    <Compile Include="Conversions.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
   </ItemGroup>
