@@ -1,6 +1,6 @@
 ﻿namespace CSharp
 {
-    public class Service
+    public class ServiceC
     {
         public static bool Do()
         {

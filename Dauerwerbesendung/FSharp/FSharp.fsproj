@@ -46,6 +46,14 @@
     <Compile Include="AssemblyInfo.fs" />
     <None Include="Script.fsx" />
     <Compile Include="Domain.fs" />
+    <Compile Include="ServiceF.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSharp\CSharp.csproj">
+      <Name>CSharp</Name>
+      <Project>{400d97e2-881d-440b-945b-312711413551}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
