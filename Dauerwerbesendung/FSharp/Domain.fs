@@ -7,10 +7,7 @@
 
     type Customer = { Firstname : string; Lastname : string }
 
-    // type inference
-
-    let GetFirstname customer =
-        customer.Firstname
+    // discriminated unions
 
     type Zahlungsmittel =
     | Bar of decimal

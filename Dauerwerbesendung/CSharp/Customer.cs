@@ -2,7 +2,7 @@
 {
     using System;
 
-    class Customer : IEquatable<Customer>
+    public class Customer : IEquatable<Customer>
     {
         public Customer(string firstname, string lastname)
         {
