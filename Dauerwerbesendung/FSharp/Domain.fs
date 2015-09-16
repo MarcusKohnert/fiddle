@@ -5,7 +5,11 @@
 
     // record types
 
-    type Customer = { Firstname : string; Lastname : string }
+    type Customer = 
+        { Firstname : string; Lastname : string }
+
+        override __.ToString() =
+            sprintf "Hello %s %s" __.Firstname __.Lastname
 
     // discriminated unions
 

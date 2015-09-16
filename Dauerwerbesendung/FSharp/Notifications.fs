@@ -17,7 +17,7 @@
             | Fax number -> SendFax(number, customer)
             | Letter (s1, s2, s3) -> SendLetter(s2, customer)
 
-    let SendNewsletter(newsletter, customer:Domain.Customer) =
+    let SendNewsletter(newsletter, customer) =
         match newsletter with
         | Email address       -> SendEmail(address, customer)
         | Fax number          -> SendFax(number, customer)
