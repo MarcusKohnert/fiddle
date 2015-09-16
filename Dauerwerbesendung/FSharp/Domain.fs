@@ -18,7 +18,7 @@
     | Kreditkarte of int * DateTime
     | Paypal of string
 
-    let DruckeRechnung(mittel:Zahlungsmittel) =
-        match mittel with
+    let DruckeRechnung zahlungsmittel =
+        match zahlungsmittel with
         | Bar betrag -> sprintf "Bar: %A" betrag
         | _ -> ""
