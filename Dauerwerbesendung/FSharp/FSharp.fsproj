@@ -50,6 +50,7 @@
     <None Include="Script.fsx" />
     <Compile Include="Notifications.fs" />
     <Compile Include="Tests.fs" />
+    <Compile Include="Pipe.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSharp\CSharp.csproj">
