@@ -22,3 +22,27 @@
         match zahlungsmittel with
         | Bar betrag -> sprintf "Bar: %A" betrag
         | _ -> ""
+
+
+    // single case discriminated unions
+
+    type CustomerId = CustomerId of int
+
+    type OrderId = 
+    | OrderId of int
+
+    let Get id =
+        // get something by id
+        ()
+
+    let GetCustomer (CustomerId id) =
+        // get customer by id
+        ()
+
+    let GetOrder (OrderId id) =
+        // get order by id
+        ()
+
+    let customerId = CustomerId 5
+
+    // GetOrder customerId // comile error
