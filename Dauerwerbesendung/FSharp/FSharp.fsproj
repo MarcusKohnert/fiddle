@@ -60,6 +60,7 @@
     <Content Include="packages.config" />
     <Content Include="app.config" />
     <None Include="TypeProviders.fsx" />
+    <Compile Include="UnitsOfMeasure.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Data">
