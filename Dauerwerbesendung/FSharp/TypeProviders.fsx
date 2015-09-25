@@ -1,4 +1,4 @@
-﻿#r @"D:\MKK\src\fiddle\Dauerwerbesendung\packages\FSharp.Data.2.2.5\lib\net40\FSharp.Data.dll"
+﻿#r @".\packages\FSharp.Data.2.2.5\lib\net40\FSharp.Data.dll"
 #r @"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Data.Linq.dll"
 #r @"C:\Program Files (x86)\Reference Assemblies\Microsoft\FSharp\.NETFramework\v4.0\4.3.0.0\Type Providers\FSharp.Data.TypeProviders.dll"
 
@@ -34,7 +34,7 @@ SaxSysRepos.GetSamples()
 let worldbank = WorldBankData.GetDataContext()
 worldbank.Countries.Germany.Indicators.``Population (Total)``.Item(2014)
 
-// SQL, don't do this in script
+// SQL
 
 type DB = SqlDataConnection<ConnectionString="""Data Source=(localdb)\v11.0;Initial Catalog=TestDb;Integrated Security=True""",ForceUpdate=true>
 DB.GetDataContext().Customer
