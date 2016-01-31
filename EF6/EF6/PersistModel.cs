@@ -12,11 +12,14 @@ namespace EF6
             this.dbContext = new DatabaseContext();
         }
 
+        public PersistModel(DatabaseContext databaseContext)
+        {
+            this.dbContext = databaseContext;
+        }
+
         public IResult<T> Persist(T entity)
         {
-            this.dbContext
-                .Set<T>()
-                .Attach(entity);
+            this.dbContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
 
             return Result<T>.Ok(entity);
         }

@@ -10,8 +10,8 @@ namespace EF6.Test
         [TestMethod]
         public void ReadByIdTest()
         {
-            IRead<Machine> dbContext = new ReadModel<Machine>();
-            var machine = dbContext.By(1);
+            IRead<Machine> read = new ReadModel<Machine>();
+            var machine = read.By(1);
 
             Assert.IsNotNull(machine);
         }

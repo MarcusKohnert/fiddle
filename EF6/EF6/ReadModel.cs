@@ -12,6 +12,11 @@ namespace EF6
             this.dbContext = new DatabaseContext();
         }
 
+        public ReadModel(DatabaseContext databaseContext)
+        {
+            this.dbContext = databaseContext;
+        }
+
         public T By(int id)
         {
             return this.dbContext
