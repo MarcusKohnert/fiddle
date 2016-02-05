@@ -1,14 +1,14 @@
 ﻿using EF6.Infrastructure;
+using EF6.Interface;
 using Models;
-using System;
 using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace EF6
 {
-    internal class DatabaseContext : DbContext
+    internal class DatabaseContext : DbContext, IUnitOfWork
     {
         public DatabaseContext()
             : base("efConString")
@@ -19,6 +19,16 @@ namespace EF6
         }
 
         public DbSet<Machine> Machines { get; set; }
+
+        public void Commit()
+        {
+            this.SaveChanges();
+        }
+
+        public Task CommitAsync()
+        {
+            return this.SaveChangesAsync();
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

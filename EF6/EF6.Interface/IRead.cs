@@ -1,7 +1,11 @@
-﻿namespace EF6.Interface
+﻿using System.Threading.Tasks;
+
+namespace EF6.Interface
 {
-    public interface IRead<T>
+    public interface IRead<T> where T : class
     {
-        T By(int id);
+        T ById(int id);
+
+        Task<T> ByIdAsync(int id);
     }
 }

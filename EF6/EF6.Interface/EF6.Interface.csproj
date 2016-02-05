@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IReadOnly.cs" />
     <Compile Include="IRead.cs" />
     <Compile Include="IQuery.cs" />
-    <Compile Include="IPersist.cs" />
+    <Compile Include="IUnitOfWorkReadOnly.cs" />
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

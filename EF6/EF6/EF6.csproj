@@ -54,14 +54,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\MachineConfiguration.cs" />
+    <Compile Include="ReadonlyDatabaseContext.cs" />
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="Infrastructure\SoftDeleteAttribute.cs" />
     <Compile Include="Infrastructure\SoftDeleteConfiguration.cs" />
     <Compile Include="Infrastructure\SoftDeleteInterceptor.cs" />
     <Compile Include="Infrastructure\SoftDeleteQueryVisitor.cs" />
-    <Compile Include="PersistModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReadModel.cs" />
+    <Compile Include="ReadEntity.cs" />
+    <Compile Include="ReadOnlyEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

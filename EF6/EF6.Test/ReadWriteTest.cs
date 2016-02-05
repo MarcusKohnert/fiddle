@@ -9,39 +9,24 @@ namespace EF6.Test
     public class ReadWriteTest
     {
         [TestMethod]
-        public void WhenReadAndWrittenWithOnSessionOnlyTheChangedPropertyIsWrittenToTheDatabase()
+        public void WhenReadAndWrittenWithOneSessionOnlyTheChangedPropertyIsWrittenToTheDatabase()
         {
-            var context = new DatabaseContext();
+            IUnitOfWork context = new DatabaseContext();
 
-            IRead<Machine> read = new ReadModel<Machine>(context);
+            IRead<Machine> read = new ReadEntity<Machine>(context);
 
-            var entity = read.By(1);
+            var entity = read.ById(1);
 
-            entity.Name = Guid.NewGuid().ToString();
+            var expected = Guid.NewGuid().ToString();
+            entity.Name = expected;
 
-            context.SaveChanges();
+            context.Commit();
 
-            var entity2 = read.By(1);
+            var updated = read.ById(1);
 
             context.Dispose();
 
-            Assert.AreNotEqual(entity.Version, entity2.Version);
-        }
-
-        [TestMethod]
-        public void Do()
-        {
-            using (var context = new DatabaseContext())
-            {
-                var entity = context.Set<Machine>().Find(1);
-                var actual = entity.Name;
-
-                entity.Name = "New machine name";
-                
-                context.SaveChanges();
-
-                Assert.AreNotEqual(actual, entity.Name);
-            }
+            Assert.AreEqual(expected, updated.Name);
         }
     }
 }
